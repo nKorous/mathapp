@@ -1,6 +1,8 @@
 {
   "name": "mathapp",
-  "version": "0.1.0",
+  "author": "N. Korous",
+  "version": "0.0.1",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "react": "^16.5.2",
