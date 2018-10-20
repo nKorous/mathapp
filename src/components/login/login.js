@@ -1,16 +1,12 @@
 import React, { Component } from "react";
-import "./landing.css";
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import "./login.css";
 
-
-/*** Internal Components */
-import AppTopbar from '../toolbar/toolbar';
-import AdditionLanding from '../addition/addition-landing'
+import { Link } from 'react-router-dom'
 
 /*** Material-ui components */
 import { Input, Button } from "@material-ui/core";
 
-export default class AppLanding extends Component {
+export default class AppLogin extends Component {
   constructor(props) {
     super(props)
 
@@ -24,6 +20,8 @@ export default class AppLanding extends Component {
     this.setState({
       name: evt.target.value
     });
+
+    localStorage.setItem('playerName', evt.target.value)
   }
 
   render() {
@@ -41,18 +39,11 @@ export default class AppLanding extends Component {
             />
           </span>
         <br />
-          <Button className='nameButton' variant="contained" color={'primary'} onClick={() => this.setState({ giveName: true })}>
+          <Link to='/games'>
+            <Button className='nameButton' variant="contained" color={'primary'} onClick={() => this.setState({ giveName: true })}>
             My Name Is: {this.state.name}
-          </Button>
-        </div>
-
-        <div className="afterName" hidden={!this.state.giveName}>
-          <AppTopbar playerName={this.state.name} />
-
-          <div className="gameSelection">
-          <AdditionLanding />
-            
-          </div>
+            </Button>
+          </Link>
         </div>
       </div>
     );

@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 import './App.css';
 
-/*** Internal modules */
-import AppLanding from './components/landing/landing'
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
-class App extends Component {
+
+
+/*** Internal modules */
+import AppLogin from './components/login/login'
+
+
+export default class App extends Component {
+
   render() {
     return (
       <div className="App">
-        <AppLanding />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={AppLogin} />
+          <Route path="/login" component={AppLogin} />
+        </Switch>
+      </Router>
       </div>
     );
   }
 }
-
-export default App;
