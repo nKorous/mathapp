@@ -3,6 +3,7 @@ import "./landing.css";
 
 /*** Internal Components */
 import AppTopbar from '../toolbar/toolbar';
+import AdditionLanding from '../addition/addition-landing'
 
 /*** Material-ui components */
 import { Input, Button } from "@material-ui/core";
@@ -27,13 +28,14 @@ export default class AppLanding extends Component {
     return (
       <div>
         <div className="nameSection" hidden={this.state.giveName}>
-          <span>
+          <span className='nameSpan'>
             Player Name: &nbsp;
             <Input
               value={this.state.name}
               onChange={evt => this.updateInputValue(evt)}
               placeholder="What is your name?"
               type={'text'}
+              required
             />
           </span>
         <br />
@@ -46,6 +48,7 @@ export default class AppLanding extends Component {
           <AppTopbar playerName={this.state.name} />
 
           <div className="gameSelection">
+          <AdditionLanding />
             
           </div>
         </div>

@@ -1,4 +1,4 @@
-function ProcessAnswer(a, b, userAnswer, operator){
+export function ProcessAnswer(a, b, userAnswer, operator){
     if(operator === '+' || operator === 'add'){
         let correctAnswer = CheckAddition(a, b)
 
@@ -9,7 +9,7 @@ function ProcessAnswer(a, b, userAnswer, operator){
     else if (operator === '-' || operator === 'sub'){
         let correctAnswer = CheckSubstraction(a, b)
 
-        let outcome = TestUserAnswer(useranswer, correctAnswer)
+        let outcome = TestUserAnswer(userAnswer, correctAnswer)
 
         return outcome
     } else {
@@ -19,7 +19,16 @@ function ProcessAnswer(a, b, userAnswer, operator){
 
 function GetRandomNumber(min, max) {
     //this is where the `random` numbers will come from for each of the equations
-    return Math.random() * (max - min) + min
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+export function CreateEquation(min, max, operator){
+    if(operator === '+'){
+        return `${GetRandomNumber(min, max)} + ${GetRandomNumber(min, max)}`
+    }
+    else if (operator === '-'){
+        return `${GetRandomNumber(min, max)} - ${GetRandomNumber(min, max)}`
+    }
 }
 
 function CheckAddition(a, b) {
@@ -35,14 +44,9 @@ function CheckSubstraction(a, b) {
 }
 
 function TestUserAnswer(userAnswer, realAnswer){
-    if (userAnswer == realAnswer){
+    if (userAnswer === realAnswer){
         return 'correct'
     } else {
         return 'wrong'
     }
-}
-
-module.exports = {
-    ProcessAnswer,
-    GetRandomNumber
 }
