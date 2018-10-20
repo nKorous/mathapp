@@ -12,7 +12,6 @@ export default class AppLogin extends Component {
 
     this.state = {
       name: '',
-      giveName: false
     };
   }
 
@@ -27,11 +26,10 @@ export default class AppLogin extends Component {
   render() {
     return (
       <div>
-        <div className="nameSection" hidden={this.state.giveName}>
+        <div className="nameSection">
           <span className='nameSpan'>
             Player Name: &nbsp;
             <Input
-              value={this.state.name}
               onChange={evt => this.updateInputValue(evt)}
               placeholder="What is your name?"
               type={'text'}
@@ -39,8 +37,8 @@ export default class AppLogin extends Component {
             />
           </span>
         <br />
-          <Link to='/games'>
-            <Button className='nameButton' variant="contained" color={'primary'} onClick={() => this.setState({ giveName: true })}>
+          <Link to='/home'>
+            <Button className='nameButton' variant="contained" color={'primary'}>
             My Name Is: {this.state.name}
             </Button>
           </Link>
