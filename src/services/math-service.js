@@ -1,19 +1,42 @@
-export function ProcessAnswer(a, b, userAnswer, operator){
-    if(operator === '+' || operator === 'add'){
-        let correctAnswer = CheckAddition(a, b)
+const uuid = require('uuid/v1')
 
-        let outcome = TestUserAnswer(userAnswer, correctAnswer)
+export function CreateEquation(min, max, operator){
+    
+    let numA = GetRandomNumber(min, max)
+    let numB = GetRandomNumber(min, max)
+    
+    if(operator === '+'){
+        let additionEquation = {
+            key: uuid(),
+            numA: numA,
+            numB: numB,
+            equation: `${numA} + ${numB} =`,
+            correctAnswer: numA + numB
+        }
 
-        return outcome
+        return additionEquation
+
     }
-    else if (operator === '-' || operator === 'sub'){
-        let correctAnswer = CheckSubstraction(a, b)
+    else if (operator === '-'){
 
-        let outcome = TestUserAnswer(userAnswer, correctAnswer)
+        let check = () => {
 
-        return outcome
-    } else {
-        return 'invalid operation'
+            if(numA > numB) {
+                return {Alpha : numA, Beta: numB}
+            } else {
+                return {Alpha: numB, Beta: numA}
+            }
+        }
+
+        let subtractionEquation = {
+            key: uuid(),
+            numA: check.Alpha,
+            numB: check.Beta,
+            equation: `${check.Alpha} - ${check.Beta} =`,
+            correctAnswer: check.Alpha - check.Beta
+        }
+
+        return subtractionEquation
     }
 }
 
@@ -22,31 +45,3 @@ function GetRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-export function CreateEquation(min, max, operator){
-    if(operator === '+'){
-        return `${GetRandomNumber(min, max)} + ${GetRandomNumber(min, max)}`
-    }
-    else if (operator === '-'){
-        return `${GetRandomNumber(min, max)} - ${GetRandomNumber(min, max)}`
-    }
-}
-
-function CheckAddition(a, b) {
-    return (a + b)
-}
-
-function CheckSubstraction(a, b) {
-    if(a > b){
-        return (a - b)
-    } else {
-        return (b - a)
-    }
-}
-
-function TestUserAnswer(userAnswer, realAnswer){
-    if (userAnswer === realAnswer){
-        return 'correct'
-    } else {
-        return 'wrong'
-    }
-}

@@ -12,19 +12,33 @@ export default class AdditionModule extends Component {
     constructor(props){
         super(props)
 
-        this.props = {
-            min: 0,
-            max: 0
+        this.state = {
+            equations: []
         }
 
-        this.GetEquation = this.GetEquation.bind(this)
+        this.getEquationData = this.getEquationData.bind(this)
+        this.makeEquationCard = this.makeEquationCard.bind(this)
     }
 
-    GetEquation(min, max){
+    getEquationData(){
+        let eq = []
+
+        for(let i=0; i < this.props.quantity; i++){
+            eq.push(CreateEquation(this.props.min, this.props.max, '+'))
+        }
+        console.log(eq)
+
+        this.setState({
+            equations: eq
+        })
+    }
+
+    makeEquationCard(e){
         return (
-            <Paper className='equationCard'>
+            <Paper className='equationCard' key={e.key}>
                 <CardContent>
-                    { CreateEquation(min, max, '+') } = <Input type={'number'} />
+
+                    { `${e.numA} + ${e.numB} = `} <Input type={'number'} />
                 </CardContent>
             </Paper>
         )
@@ -33,7 +47,8 @@ export default class AdditionModule extends Component {
     render(){
         return(
             <div>
-                { this.GetEquation(this.props.min, this.props.max) }
+                <h1>Equations min: {this.props.min}, max: {this.props.max}, qt: {this.props.quantity}</h1>
+               { this.state.equations.map(this.makeEquationCard) }
             </div>
         )
     }
