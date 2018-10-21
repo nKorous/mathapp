@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 /*** Internal Components */
 import AppToolbar from './toolbar/toolbar'
-import GameLanding from '../games/game-landing'
 import MathLanding from '../games/math/math-landing'
+import GameLanding from '../games/game-landing'
 
 export default class AppNavigation extends Component {
     constructor(props){
@@ -22,8 +22,10 @@ export default class AppNavigation extends Component {
 
                 <Router>
                     <Switch>
+                        <Route path='/home/games/math' component={MathLanding} />
+
+
                         <Route path='/home/games' component={GameLanding} />
-                        <Route exact path='/home/games/math' component={MathLanding} />
                     </Switch>
                 </Router>
             </div>

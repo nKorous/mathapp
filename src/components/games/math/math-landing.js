@@ -13,7 +13,13 @@ export default class MathLanding extends Component {
     render(){
         return (
             <div>
-                <h1>Math Games!</h1>
+                <div className='mathLandingHeader'>
+                    <h1>Math Games!</h1>
+                </div>
+
+                <div className='mathLandingSelection'>
+                
+                </div>
             </div>
         )
     }

@@ -21,8 +21,7 @@ export default class App extends Component {
           <Route path="/login" component={AppLogin} />
           <Route path='/home' component={AppNavigation} />
 
-          <Route exact path='**' component={AppLogin} />
-          <Route exact path='/**/**' component={AppLogin} />
+          <Route exact path='**/' component={AppLogin} />
         </Switch>
       </Router>
       </div>
