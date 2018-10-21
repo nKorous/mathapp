@@ -1,34 +1,65 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+
+/*** Material UI */
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Drawer from "@material-ui/core/Drawer";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 
 /*** Internal Components */
-import AppToolbar from './toolbar/toolbar'
-import MathLanding from '../games/math/math-landing'
-import GameLanding from '../games/game-landing'
+import AppLogin from "../login/login";
+import AppMain from "../navigation/app-main";
 
 export default class AppNavigation extends Component {
-    constructor(props){
-        super(props)
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            playerName: localStorage.getItem('playerName')
-        }
-    }
+    this.state = {
+      playerName: localStorage.getItem("playerName"),
+      sidebarOpen: false
+    };
+  }
 
-    render(){
-        return (
-            <div>
-                <AppToolbar playerName={this.state.playerName} />
+  toggleSidebar = open => () => {
+    this.setState({
+      sidebarOpen: open
+    });
+  };
 
-                <Router>
-                    <Switch>
-                        <Route path='/home/games/math' component={MathLanding} />
-
-
-                        <Route path='/home/games' component={GameLanding} />
-                    </Switch>
-                </Router>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <AppBar position="static" className="appbarClass">
+          <Toolbar>
+            <IconButton>
+              <MenuIcon onClick={this.toggleSidebar(true)} />
+            </IconButton>
+            <span style={{ flex: "1 1" }} />
+            Welcome: {this.props.playerName}
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          classes={{
+            paper: "sidebarClass"
+          }}
+          open={this.state.sidebarOpen}
+          onClose={this.toggleSidebar(false)}
+        >
+        <div>
+            Welcome: {this.state.playerName}
+        </div>
+        </Drawer>
+        <div className="content">
+          <Router>
+            <Switch>
+              <Route path="/" component={AppLogin} exact />
+              <Route path="/home" component={AppMain} />
+            </Switch>
+          </Router>
+        </div>
+      </div>
+    );
+  }
 }
