@@ -12,17 +12,20 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AppLogin from "../login/login";
 import AppMain from "../navigation/app-main";
 
+/*** Internal Services */
+import * as loginService from '../../services/login-service'
+
 export default class AppNavigation extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      playerName: localStorage.getItem("playerName"),
+      playerInfo: loginService.GetLoginCreds(),
       sidebarOpen: false
     };
   }
 
-  toggleSidebar = open => () => {
+  toggleSidebar = (open) => () => {
     this.setState({
       sidebarOpen: open
     });
@@ -37,7 +40,7 @@ export default class AppNavigation extends Component {
               <MenuIcon onClick={this.toggleSidebar(true)} />
             </IconButton>
             <span style={{ flex: "1 1" }} />
-            Welcome: {this.props.playerName}
+            Welcome: {this.state.playerInfo.playerName}
           </Toolbar>
         </AppBar>
         <Drawer
@@ -48,7 +51,7 @@ export default class AppNavigation extends Component {
           onClose={this.toggleSidebar(false)}
         >
         <div>
-            Welcome: {this.state.playerName}
+            Welcome: {this.state.playerInfo.playerName}
         </div>
         </Drawer>
         <div className="content">

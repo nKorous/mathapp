@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom'
 /*** Material-ui components */
 import { Input, Button } from "@material-ui/core";
 
+/*** Internal Services */
+import * as loginService from '../../services/login-service'
+
 export default class AppLogin extends Component {
   constructor(props) {
     super(props)
@@ -20,7 +23,7 @@ export default class AppLogin extends Component {
       name: evt.target.value
     });
 
-    localStorage.setItem('playerName', evt.target.value)
+    loginService.Login(evt.target.value)
   }
 
   render() {

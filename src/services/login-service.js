@@ -1,7 +1,12 @@
 export function Login(playerName) {
-    localStorage.setItem(`${playerName}-Login`, { playerName: playerName, isLoggedIn: true})
+    let loginInfo = JSON.stringify({ playerName: playerName, isLoggedIn: true})
+    localStorage.setItem('login', loginInfo)
 }
 
 export function Logout(playerName) {
-    localStorage.setItem(`${playerName}-Login`, { playerName: playerName, isLoggedIn: false})
+    localStorage.setItem('login', { playerName: playerName, isLoggedIn: false})
+}
+
+export function GetLoginCreds(){
+    return localStorage.getItem('login')
 }
